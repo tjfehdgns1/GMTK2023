@@ -1,14 +1,287 @@
-[gd_scene load_steps=6 format=3 uid="uid://b0ig16krbj1xj"]
+[gd_scene load_steps=10 format=3 uid="uid://b0ig16krbj1xj"]
 
 [ext_resource type="Script" path="res://ui/start_menu.gd" id="1_fe600"]
 [ext_resource type="Texture2D" uid="uid://c0d2gco5dora" path="res://ui/startmenuimage_background.png" id="2_f40wk"]
 [ext_resource type="Texture2D" uid="uid://b0na427ihximn" path="res://ui/startmenuimage-sword-Sheet.png" id="3_eyuv5"]
+[ext_resource type="Texture2D" uid="uid://cahcvwyjae2fm" path="res://ui/startmenuimage-shadow-Sheet.png" id="3_qevrm"]
+[ext_resource type="Texture2D" uid="uid://cc0sejuhm4xot" path="res://player/Player-Sheet.png" id="5_oj6gt"]
+[ext_resource type="Texture2D" uid="uid://b0xifo8uwchwx" path="res://enemy/DrillElephant-Sheet.png" id="6_abwyo"]
 
 [sub_resource type="Animation" id="Animation_u3mom"]
 resource_name = "startmenu"
+length = 11.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Startmenuimage-sword-sheet:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 6, 7.2, 7.5, 7.8, 8.1, 8.1001, 8.4, 8.7, 10.5),
+"transitions": PackedFloat32Array(1, 0.0853776, 1, 1, 1, 1, 1, 1, 1, 1, 0.148651),
+"update": 0,
+"values": [Vector2(155, 165), Vector2(150, 125), Vector2(150, 155), Vector2(133, 144), Vector2(133, 131), Vector2(133, 139), Vector2(133, 131), Vector2(133, 139), Vector2(133, 139), Vector2(128, 147), Vector2(128, 156)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Startmenuimage-sword-sheet:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4, 2.7, 3, 3.3, 3.6, 3.9, 4.2, 4.5, 4.8, 5.1, 5.4, 5.7, 6, 8.7, 10.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.129408),
+"update": 0,
+"values": [0.0, -0.523599, 0.523599, -0.523599, 0.523599, -0.523599, 0.523599, -0.261799, 0.261799, -0.261799, 0.261799, -0.261799, 0.261799, -0.261799, 0.0872665, -0.0872665, 0.0872665, -0.0872665, 0.0872665, -0.0872665, 0.0872665, 0.232493, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 9.7, 10.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PlayerSprite:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(6, 6.3, 6.9, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(316, 148), Vector2(316, 148), Vector2(117, 159), Vector2(117, 151)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PlayerSprite:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(6, 6.8, 6.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0872665, 0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PlayerSprite:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 6, 6.6, 10.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, true, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Shadow:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 6.7, 7.2, 10.5, 10.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, false, false, true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("DrillElephant:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(9.6, 10.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(332, 112), Vector2(-76, 176)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("DrillElephant:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(9.6, 10.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(3.02956, 3.02956)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("PlayerSprite/Shadow2:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(10),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.45, 0.45)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("DrillElephant:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(9.6, 10.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Shadow:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(153, 166)]
+}
+
+[sub_resource type="Animation" id="Animation_5ar3b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Startmenuimage-sword-sheet:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(160, 90)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Startmenuimage-sword-sheet:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerSprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(316, 148)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PlayerSprite:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("DrillElephant:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("DrillElephant:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-76, 176)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("PlayerSprite/Shadow2:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.533333, 0.533333)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("DrillElephant:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("PlayerSprite:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Shadow:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(153, 166)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l1yt1"]
 _data = {
+"RESET": SubResource("Animation_5ar3b"),
 "startmenu": SubResource("Animation_u3mom")
 }
 
@@ -30,12 +303,45 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_f40wk")
 
+[node name="Shadow" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(153, 166)
+rotation = -0.0436334
+texture = ExtResource("3_qevrm")
+offset = Vector2(-16, -76)
+hframes = 8
+
 [node name="Startmenuimage-sword-sheet" type="Sprite2D" parent="."]
 position = Vector2(160, 90)
 texture = ExtResource("3_eyuv5")
+offset = Vector2(5, -75)
 hframes = 7
 
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+position = Vector2(316, 148)
+scale = Vector2(1.875, 1.875)
+texture = ExtResource("5_oj6gt")
+offset = Vector2(0, -15)
+hframes = 3
+
+[node name="Shadow2" type="Sprite2D" parent="PlayerSprite"]
+show_behind_parent = true
+position = Vector2(0.533325, 1.06667)
+scale = Vector2(0.533333, 0.533333)
+texture = ExtResource("3_qevrm")
+offset = Vector2(-16, -76)
+hframes = 8
+
+[node name="DrillElephant" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-76, 176)
+texture = ExtResource("6_abwyo")
+flip_h = true
+hframes = 2
+frame = 1
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "startmenu"
 libraries = {
 "": SubResource("AnimationLibrary_l1yt1")
 }
