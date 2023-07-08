@@ -1,0 +1,183 @@
+[gd_scene load_steps=16 format=3 uid="uid://6mr5p45asyw6"]
+
+[ext_resource type="Texture2D" uid="uid://cc0sejuhm4xot" path="res://player/Player-Sheet.png" id="1_0hdq0"]
+[ext_resource type="Script" path="res://player/player.gd" id="1_b2r3n"]
+[ext_resource type="PackedScene" uid="uid://rya82pbg5a31" path="res://player/weapon.tscn" id="2_y54ht"]
+[ext_resource type="PackedScene" uid="uid://cpxlhgo304shr" path="res://common/hurtbox.tscn" id="3_lkwi2"]
+[ext_resource type="PackedScene" uid="uid://472i0887s0b" path="res://autoloads/player_stats.tscn" id="5_k0jhj"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nlcoe"]
+radius = 4.0
+height = 14.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b5mg4"]
+size = Vector2(14, 19)
+
+[sub_resource type="Animation" id="Animation_pun3g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_gsewx"]
+resource_name = "attack"
+
+[sub_resource type="Animation" id="Animation_cskhn"]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.9),
+"transitions": PackedFloat32Array(1, 0.5, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_dnand"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_vxguh"]
+resource_name = "jump"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_14mvm"]
+resource_name = "run"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u7ttr"]
+_data = {
+"RESET": SubResource("Animation_pun3g"),
+"attack": SubResource("Animation_gsewx"),
+"die": SubResource("Animation_cskhn"),
+"idle": SubResource("Animation_dnand"),
+"jump": SubResource("Animation_vxguh"),
+"run": SubResource("Animation_14mvm")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jqv64"]
+radius = 6.0
+height = 20.0
+
+[node name="Player" type="CharacterBody2D"]
+z_index = 10
+collision_layer = 2
+floor_constant_speed = true
+script = ExtResource("1_b2r3n")
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+rotation = 0.00412722
+texture = ExtResource("1_0hdq0")
+hframes = 3
+
+[node name="Weapon" parent="PlayerSprite" instance=ExtResource("2_y54ht")]
+show_behind_parent = true
+position = Vector2(-0.0165088, 3.99997)
+rotation = 2.29437
+scale = Vector2(1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_nlcoe")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -14.5)
+shape = SubResource("RectangleShape2D_b5mg4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_u7ttr")
+}
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[node name="JumpBufferTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -15)
+zoom = Vector2(0.5, 0.5)
+
+[node name="Hurtbox" parent="." instance=ExtResource("3_lkwi2")]
+collision_layer = 32
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -12)
+shape = SubResource("CapsuleShape2D_jqv64")
+
+[node name="PlayerStats" parent="." instance=ExtResource("5_k0jhj")]
+max_health = 2
+
+[connection signal="timeout" from="JumpBufferTimer" to="." method="_on_jump_buffer_timer_timeout"]
