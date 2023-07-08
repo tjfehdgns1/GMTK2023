@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bn1t3yywd8gp3"]
+[gd_scene load_steps=4 format=3 uid="uid://bn1t3yywd8gp3"]
 
+[ext_resource type="Script" path="res://ui/health_meter.gd" id="1_b4ld4"]
 [ext_resource type="Texture2D" uid="uid://mti25lv3qcf5" path="res://ui/Empty.png" id="1_ip6m2"]
 [ext_resource type="Texture2D" uid="uid://dkysnanmbl4ai" path="res://ui/Full.png" id="2_bagjh"]
 
@@ -10,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_b4ld4")
 
 [node name="Empty" type="TextureRect" parent="."]
 layout_mode = 0

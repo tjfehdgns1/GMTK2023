@@ -377,10 +377,6 @@ collision_mask = 0
 position = Vector2(0, -12)
 shape = SubResource("CapsuleShape2D_jqv64")
 
-[node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
-
 [connection signal="timeout" from="JumpBufferTimer" to="." method="_on_jump_buffer_timer_timeout"]
 [connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]
 

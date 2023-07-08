@@ -1,12 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://dlg77ed1qyf8m"]
+[gd_scene load_steps=5 format=3 uid="uid://dlg77ed1qyf8m"]
 
 [ext_resource type="PackedScene" uid="uid://do32r0p6416o5" path="res://levels/test_level.tscn" id="1_dxtw2"]
+[ext_resource type="Script" path="res://main.gd" id="1_r0gqi"]
 [ext_resource type="PackedScene" uid="uid://6mr5p45asyw6" path="res://player/player.tscn" id="2_cett8"]
+[ext_resource type="PackedScene" uid="uid://bn1t3yywd8gp3" path="res://ui/health_meter.tscn" id="4_xc8b0"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_r0gqi")
 
 [node name="TestLevel" parent="." instance=ExtResource("1_dxtw2")]
 
 [node name="Player" parent="." instance=ExtResource("2_cett8")]
 
 [node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="HealthMeter" parent="HUD" instance=ExtResource("4_xc8b0")]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 16.0
+mouse_filter = 2

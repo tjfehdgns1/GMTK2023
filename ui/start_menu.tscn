@@ -1,0 +1,81 @@
+[gd_scene load_steps=6 format=3 uid="uid://b0ig16krbj1xj"]
+
+[ext_resource type="Script" path="res://ui/start_menu.gd" id="1_fe600"]
+[ext_resource type="Texture2D" uid="uid://c0d2gco5dora" path="res://ui/startmenuimage_background.png" id="2_f40wk"]
+[ext_resource type="Texture2D" uid="uid://b0na427ihximn" path="res://ui/startmenuimage-sword-Sheet.png" id="3_eyuv5"]
+
+[sub_resource type="Animation" id="Animation_u3mom"]
+resource_name = "startmenu"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l1yt1"]
+_data = {
+"startmenu": SubResource("Animation_u3mom")
+}
+
+[node name="StartMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fe600")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_f40wk")
+
+[node name="Startmenuimage-sword-sheet" type="Sprite2D" parent="."]
+position = Vector2(160, 90)
+texture = ExtResource("3_eyuv5")
+hframes = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_l1yt1")
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 48
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="StartButton" type="Button" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+focus_neighbor_top = NodePath("../QuitButton")
+focus_neighbor_bottom = NodePath("../OptionButton")
+text = "Start"
+
+[node name="OptionButton" type="Button" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+focus_neighbor_top = NodePath("../StartButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
+text = "Option"
+
+[node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+focus_neighbor_top = NodePath("../OptionButton")
+focus_neighbor_bottom = NodePath("../StartButton")
+text = "Quit"

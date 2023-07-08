@@ -38,7 +38,6 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	$Label.text = str(PlayerStats.health)
 	move_x = Input.get_axis("move_left", "move_right")
 	
 	apply_gravity(delta)
