@@ -1,0 +1,97 @@
+[gd_scene load_steps=10 format=3 uid="uid://q4qj8rc811ev"]
+
+[ext_resource type="Texture2D" uid="uid://ci47qslr2j7qi" path="res://enemy/Cannon-Sheet.png" id="1_7vkyn"]
+[ext_resource type="Script" path="res://enemy/cannon.gd" id="1_jfg24"]
+[ext_resource type="PackedScene" uid="uid://dvq1k62guriky" path="res://common/stats.tscn" id="2_olg1k"]
+[ext_resource type="PackedScene" uid="uid://cpxlhgo304shr" path="res://common/hurtbox.tscn" id="3_toti4"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yjk28"]
+height = 26.0
+
+[sub_resource type="Animation" id="Animation_m1gwh"]
+resource_name = "fire"
+loop_mode = 1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fire_bullet"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(2, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_ojrqr"]
+resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_b1dms"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7qoga"]
+_data = {
+"RESET": SubResource("Animation_b1dms"),
+"fire": SubResource("Animation_m1gwh"),
+"idle": SubResource("Animation_ojrqr")
+}
+
+[node name="Cannon" type="Node2D"]
+script = ExtResource("1_jfg24")
+
+[node name="Stats" parent="." instance=ExtResource("2_olg1k")]
+
+[node name="Hurtbox" parent="." instance=ExtResource("3_toti4")]
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -10)
+shape = SubResource("CapsuleShape2D_yjk28")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -14)
+texture = ExtResource("1_7vkyn")
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "fire"
+libraries = {
+"": SubResource("AnimationLibrary_7qoga")
+}
+
+[node name="BulletSpawnPoint" type="Marker2D" parent="."]
+position = Vector2(0, -18)
+
+[node name="FireDirection" type="Marker2D" parent="."]
+position = Vector2(0, -29)
+
+[connection signal="no_health" from="Stats" to="." method="_on_stats_no_health"]
+[connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]

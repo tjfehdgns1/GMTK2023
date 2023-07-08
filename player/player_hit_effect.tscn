@@ -4,5 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://b0u4kagdtuq0p" path="res://common/playerhiteffect.png" id="2_6y8kj"]
 
 [node name="PlayerHitEffect" instance=ExtResource("1_jjg38")]
-amount = 2
 texture = ExtResource("2_6y8kj")
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0

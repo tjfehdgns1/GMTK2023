@@ -1,0 +1,79 @@
+[gd_scene load_steps=12 format=3 uid="uid://dx5l7r70l1cff"]
+
+[ext_resource type="Script" path="res://enemy/worm.gd" id="1_1ti68"]
+[ext_resource type="Texture2D" uid="uid://cfn3idtdap28k" path="res://enemy/Worm-Sheet.png" id="1_eyome"]
+[ext_resource type="PackedScene" uid="uid://7uxbbdxixb7d" path="res://common/hitbox.tscn" id="2_pffgj"]
+[ext_resource type="PackedScene" uid="uid://cpxlhgo304shr" path="res://common/hurtbox.tscn" id="3_q2fjh"]
+[ext_resource type="PackedScene" uid="uid://dvq1k62guriky" path="res://common/stats.tscn" id="4_pix67"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jokb0"]
+atlas = ExtResource("1_eyome")
+region = Rect2(0, 0, 24, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jsh86"]
+atlas = ExtResource("1_eyome")
+region = Rect2(24, 0, 24, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cknyy"]
+atlas = ExtResource("1_eyome")
+region = Rect2(48, 0, 24, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fjsyj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jokb0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jsh86")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cknyy")
+}],
+"loop": true,
+"name": &"crawl",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mvv5r"]
+radius = 6.0
+height = 24.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5pg6b"]
+radius = 5.0
+height = 20.0
+
+[node name="Worm" type="Node2D"]
+script = ExtResource("1_1ti68")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_fjsyj")
+animation = &"crawl"
+autoplay = "crawl"
+
+[node name="Hitbox" parent="." instance=ExtResource("2_pffgj")]
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_mvv5r")
+
+[node name="Hurtbox" parent="." instance=ExtResource("3_q2fjh")]
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_5pg6b")
+
+[node name="Stats" parent="." instance=ExtResource("4_pix67")]
+
+[node name="FloorCast" type="RayCast2D" parent="."]
+target_position = Vector2(0, 14)
+
+[node name="WallCast" type="RayCast2D" parent="."]
+rotation = 4.71239
+target_position = Vector2(-6.99382e-07, 16)
+
+[connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]
+[connection signal="no_health" from="Stats" to="." method="_on_stats_no_health"]

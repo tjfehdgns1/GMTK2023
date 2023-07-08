@@ -11,12 +11,14 @@ particles_anim_loop = false
 
 [node name="EnemyHitEffect" instance=ExtResource("1_nj5ee")]
 material = SubResource("CanvasItemMaterial_oi27y")
-emitting = false
 amount = 1
-one_shot = true
-speed_scale = 5.0
+lifetime = 0.7
 texture = ExtResource("2_jhpr7")
 emission_shape = 0
 initial_velocity_min = 0.0
 initial_velocity_max = 0.0
-anim_speed_max = 1.0
+anim_speed_min = 4.0
+anim_speed_max = 4.0
+
+[node name="Timer" parent="." index="0"]
+wait_time = 0.6
