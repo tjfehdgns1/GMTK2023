@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2ccnrh5y37y7"]
+
+[ext_resource type="PackedScene" uid="uid://mtdfqbtqllrs" path="res://enemy/enemy_hit_effect.tscn" id="1_jjg38"]
+[ext_resource type="Texture2D" uid="uid://b0u4kagdtuq0p" path="res://common/playerhiteffect.png" id="2_6y8kj"]
+
+[node name="PlayerHitEffect" instance=ExtResource("1_jjg38")]
+amount = 2
+texture = ExtResource("2_6y8kj")

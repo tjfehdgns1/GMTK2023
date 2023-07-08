@@ -22,14 +22,17 @@ var jumped := false
 @onready var player_sprite: Sprite2D = $PlayerSprite
 @onready var override_animation_player: AnimationPlayer = $OverrideAnimationPlayer
 @onready var camera_2d: Camera2D = $Camera2D
+@onready var hurtbox: Area2D = $Hurtbox
 
 
 
+const DUST_EFFECT := preload("res://common/dust.tscn")
+const PLAYER_HIT_EFFECT := preload("res://player/player_hit_effect.tscn")
 
 var pre_input := 0.0
 
 
-
+# --Update--
 func _ready() -> void:
 	PlayerStats.no_health.connect(_die)
 
@@ -75,6 +78,10 @@ func update_animation(input_x):
 		if velocity.y < 0:
 			animation_player.play("jump")
 
+func create_dust_effect():
+	Utility.instantiate_scene_on_world(DUST_EFFECT, global_position)
+
+# --movement--
 
 func apply_gravity(delta):
 	var gravity := fall_gravity
@@ -130,8 +137,7 @@ func jump(jump_velocity):
 	
 	
 func attack():
-	if Input.is_action_just_pressed("attack"):
-		print_debug("click")
+	if Input.is_action_pressed("attack"):
 		override_animation_player.play("attack")
 	
 	
@@ -143,12 +149,17 @@ func _on_jump_buffer_timer_timeout() -> void:
 
 
 func _on_hurtbox_hurt(hitbox, damage) -> void:
+	override_animation_player.play("blink")
 	print_debug("player hurt")
 	Events.add_screenshake.emit(2, 0.1)
 	PlayerStats.health -= damage
+	hurtbox.is_invincible = true
+	await get_tree().create_timer(1.0).timeout
+	hurtbox.is_invincible = false
 	pass # Replace with function body.
 
 
 func _die():
 	camera_2d.reparent(get_tree().current_scene)
+	Utility.instantiate_scene_on_world(PLAYER_HIT_EFFECT, global_position)
 	queue_free()

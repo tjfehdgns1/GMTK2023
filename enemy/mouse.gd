@@ -15,7 +15,7 @@ extends CharacterBody2D
 @onready var floor_cast: RayCast2D = $FloorCast
 
 
-#const ENEMY_DEATH_EFFECT := preload("res://enemies/enemy_death_effect.tscn")
+const ENEMY_DEATH_EFFECT := preload("res://enemy/enemy_death.tscn")
 
 @export var move_x := 1
 
@@ -54,5 +54,5 @@ func _on_hurtbox_hurt(hitbox, damage) -> void:
 
 
 func _on_stats_no_health() -> void:
-#	Utility.instantiate_scene_on_world(ENEMY_DEATH_EFFECT, global_position)
+	Utility.instantiate_scene_on_world(ENEMY_DEATH_EFFECT, global_position)
 	queue_free()

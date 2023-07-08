@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpjiky5o3ffaj"]
+
+[ext_resource type="PackedScene" uid="uid://cg7ybbr4b30ls" path="res://common/dust.tscn" id="1_xpsxq"]
+
+[node name="EnemyDeath" instance=ExtResource("1_xpsxq")]
+amount = 5
+emission_sphere_radius = 5.0
+initial_velocity_max = 8.0

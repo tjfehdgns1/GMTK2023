@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://mtdfqbtqllrs"]
+
+[ext_resource type="PackedScene" uid="uid://cg7ybbr4b30ls" path="res://common/dust.tscn" id="1_nj5ee"]
+[ext_resource type="Texture2D" uid="uid://2d7i2bmit1dh" path="res://common/enemyhiteffect.png" id="2_jhpr7"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_oi27y"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[node name="EnemyHitEffect" instance=ExtResource("1_nj5ee")]
+material = SubResource("CanvasItemMaterial_oi27y")
+emitting = false
+amount = 1
+one_shot = true
+speed_scale = 5.0
+texture = ExtResource("2_jhpr7")
+emission_shape = 0
+initial_velocity_min = 0.0
+initial_velocity_max = 0.0
+anim_speed_max = 1.0

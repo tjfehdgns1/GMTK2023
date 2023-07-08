@@ -21,20 +21,20 @@ height = 32.0
 radius = 4.0
 height = 26.0
 
-[sub_resource type="Animation" id="Animation_6ttg8"]
-resource_name = "idle"
-
-[sub_resource type="Animation" id="Animation_v2ecp"]
-resource_name = "run"
-
-[sub_resource type="Animation" id="Animation_f0wk4"]
-resource_name = "jump"
+[sub_resource type="Animation" id="Animation_ur4e3"]
+resource_name = "attack"
 
 [sub_resource type="Animation" id="Animation_7jm4t"]
 resource_name = "die"
 
-[sub_resource type="Animation" id="Animation_ur4e3"]
-resource_name = "attack"
+[sub_resource type="Animation" id="Animation_6ttg8"]
+resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_f0wk4"]
+resource_name = "jump"
+
+[sub_resource type="Animation" id="Animation_v2ecp"]
+resource_name = "run"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6bfh3"]
 _data = {

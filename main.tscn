@@ -8,3 +8,5 @@
 [node name="TestLevel" parent="." instance=ExtResource("1_dxtw2")]
 
 [node name="Player" parent="." instance=ExtResource("2_cett8")]
+
+[node name="HUD" type="CanvasLayer" parent="."]
