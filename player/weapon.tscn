@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://rya82pbg5a31"]
+[gd_scene load_steps=5 format=3 uid="uid://rya82pbg5a31"]
 
 [ext_resource type="Texture2D" uid="uid://blwgl0xo4d4ly" path="res://sword/Sword-Sheet.png" id="1_72a2x"]
+[ext_resource type="Script" path="res://player/weapon.gd" id="1_in1mg"]
 [ext_resource type="PackedScene" uid="uid://7uxbbdxixb7d" path="res://common/hitbox.tscn" id="1_m0ydd"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uglu2"]
@@ -8,8 +9,11 @@ radius = 7.0
 height = 34.0
 
 [node name="Weapon" type="Node2D"]
+script = ExtResource("1_in1mg")
 
 [node name="Hitbox" parent="." instance=ExtResource("1_m0ydd")]
+collision_layer = 0
+collision_mask = 65
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -14)
@@ -19,3 +23,6 @@ shape = SubResource("CapsuleShape2D_uglu2")
 position = Vector2(0, -23)
 texture = ExtResource("1_72a2x")
 hframes = 6
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

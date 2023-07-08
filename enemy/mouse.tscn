@@ -1,0 +1,122 @@
+[gd_scene load_steps=13 format=3 uid="uid://cllcuq5e1o251"]
+
+[ext_resource type="Script" path="res://enemy/mouse.gd" id="1_hve8s"]
+[ext_resource type="Texture2D" uid="uid://dbdp7857o4bsd" path="res://enemy/Mouse-Sheet.png" id="1_yroe0"]
+[ext_resource type="PackedScene" uid="uid://7uxbbdxixb7d" path="res://common/hitbox.tscn" id="2_03k80"]
+[ext_resource type="PackedScene" uid="uid://cpxlhgo304shr" path="res://common/hurtbox.tscn" id="3_fea11"]
+[ext_resource type="PackedScene" uid="uid://dvq1k62guriky" path="res://common/stats.tscn" id="4_frx4s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2xvfs"]
+size = Vector2(13, 9)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h5c7n"]
+radius = 5.0
+height = 16.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t6p37"]
+radius = 8.0
+
+[sub_resource type="Animation" id="Animation_jv3tp"]
+resource_name = "run"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_8v46a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_5wmfc"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.2, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3u86k"]
+_data = {
+"RESET": SubResource("Animation_8v46a"),
+"idle": SubResource("Animation_5wmfc"),
+"run": SubResource("Animation_jv3tp")
+}
+
+[node name="Mouse" type="CharacterBody2D"]
+collision_layer = 4
+floor_constant_speed = true
+floor_snap_length = 2.0
+script = ExtResource("1_hve8s")
+turn_at_ledge = true
+speed = 50.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_2xvfs")
+
+[node name="Hitbox" parent="." instance=ExtResource("2_03k80")]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(2, -6)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_h5c7n")
+
+[node name="Hurtbox" parent="." instance=ExtResource("3_fea11")]
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -6)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_t6p37")
+
+[node name="Stats" parent="." instance=ExtResource("4_frx4s")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_3u86k")
+}
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+position = Vector2(0, -6)
+texture = ExtResource("1_yroe0")
+hframes = 3
+
+[node name="FloorCast" type="RayCast2D" parent="."]
+position = Vector2(0, -6)
+target_position = Vector2(0, 15)
+
+[connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]
+[connection signal="no_health" from="Stats" to="." method="_on_stats_no_health"]

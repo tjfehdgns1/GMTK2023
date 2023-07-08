@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bshjfvy2hiom2"]
+
+[ext_resource type="Script" path="res://common/camera_2d.gd" id="1_u118n"]
+
+[node name="Camera2D" type="Camera2D"]
+position = Vector2(0, -15)
+zoom = Vector2(0.8, 0.8)
+script = ExtResource("1_u118n")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

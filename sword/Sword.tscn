@@ -54,24 +54,25 @@ texture = ExtResource("1_8au1a")
 hframes = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(-1, -4)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_i6eii")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(-1, -16)
 shape = SubResource("RectangleShape2D_axpt5")
 
 [node name="Hitbox" parent="." instance=ExtResource("2_1eno3")]
-visible = false
+collision_layer = 0
+collision_mask = 65
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -16)
 shape = SubResource("CapsuleShape2D_lmwft")
 
 [node name="Hurtbox" parent="." instance=ExtResource("3_c1uyv")]
+collision_layer = 32
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, -14)
@@ -87,3 +88,5 @@ libraries = {
 [node name="CoyoteTimer" type="Timer" parent="."]
 
 [node name="JumpBufferTimer" type="Timer" parent="."]
+
+[connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]

@@ -128,3 +128,7 @@ func _on_jump_buffer_timer_timeout() -> void:
 
 
 
+
+
+func _on_hurtbox_hurt(hitbox, damage) -> void:
+	pass # Replace with function body.

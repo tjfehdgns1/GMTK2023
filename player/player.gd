@@ -20,6 +20,9 @@ var jumped := false
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var player_sprite: Sprite2D = $PlayerSprite
+@onready var override_animation_player: AnimationPlayer = $OverrideAnimationPlayer
+@onready var camera_2d: Camera2D = $Camera2D
+
 
 
 
@@ -27,8 +30,12 @@ var pre_input := 0.0
 
 
 
+func _ready() -> void:
+	PlayerStats.no_health.connect(_die)
+
+
 func _physics_process(delta: float) -> void:
-	
+	$Label.text = str(PlayerStats.health)
 	move_x = Input.get_axis("move_left", "move_right")
 	
 	apply_gravity(delta)
@@ -47,7 +54,7 @@ func _physics_process(delta: float) -> void:
 
 	handle_jump()
 	
-
+	attack()
 	
 func update_animation(input_x):
 	if input_x != 0:
@@ -117,15 +124,31 @@ func handle_jump():
 	pass
 func jump(jump_velocity):
 	velocity.y = jump_velocity
+	
+	
+	
+	
+	
+func attack():
+	if Input.is_action_just_pressed("attack"):
+		print_debug("click")
+		override_animation_player.play("attack")
+	
+	
+	
 
 func _on_jump_buffer_timer_timeout() -> void:
 	can_jump_buffer = false
 
 
 
+func _on_hurtbox_hurt(hitbox, damage) -> void:
+	print_debug("player hurt")
+	Events.add_screenshake.emit(2, 0.1)
+	PlayerStats.health -= damage
+	pass # Replace with function body.
 
 
-
-
-
-
+func _die():
+	camera_2d.reparent(get_tree().current_scene)
+	queue_free()

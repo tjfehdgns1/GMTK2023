@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://bmoed2uao4jo4"]
+
+[ext_resource type="Texture2D" uid="uid://b8eararsi21ss" path="res://common/spikeball.png" id="1_662n4"]
+[ext_resource type="PackedScene" uid="uid://7uxbbdxixb7d" path="res://common/hitbox.tscn" id="2_2sil1"]
+
+[sub_resource type="Animation" id="Animation_h7i1m"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(0, 0, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -1), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_e5ivt"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_70vqd"]
+_data = {
+"RESET": SubResource("Animation_e5ivt"),
+"idle": SubResource("Animation_h7i1m")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_28i3s"]
+size = Vector2(8, 8)
+
+[node name="SpikeBall" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_662n4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_70vqd")
+}
+
+[node name="Hitbox" parent="." instance=ExtResource("2_2sil1")]
+collision_mask = 96
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(4, -4)
+shape = SubResource("RectangleShape2D_28i3s")

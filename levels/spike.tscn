@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0eowp5drqjf2"]
+
+[ext_resource type="Texture2D" uid="uid://bs4rapce4cc62" path="res://common/spike.png" id="1_ikpct"]
+[ext_resource type="PackedScene" uid="uid://7uxbbdxixb7d" path="res://common/hitbox.tscn" id="2_gfcvs"]
+
+[node name="Spike" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(11, -14)
+texture = ExtResource("1_ikpct")
+
+[node name="Hitbox" parent="." instance=ExtResource("2_gfcvs")]
+collision_mask = 96
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox"]
+polygon = PackedVector2Array(0, 0, 2, -9, 3, -9, 5, 0)

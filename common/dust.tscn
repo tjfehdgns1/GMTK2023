@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://cg7ybbr4b30ls"]
+
+[ext_resource type="Texture2D" uid="uid://ihrvgfe0xb6g" path="res://common/dust.png" id="1_lnw5a"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_76o0t"]
+particles_animation = true
+particles_anim_h_frames = 10
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[node name="Dust" type="CPUParticles2D"]
+material = SubResource("CanvasItemMaterial_76o0t")
+amount = 2
+explosiveness = 1.0
+texture = ExtResource("1_lnw5a")
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector2(0, -1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 4.0
+anim_speed_min = 1.0
+anim_speed_max = 2.0
