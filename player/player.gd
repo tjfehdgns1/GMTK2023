@@ -27,6 +27,7 @@ var jumped := false
 
 
 const DUST_EFFECT := preload("res://common/dust.tscn")
+const JUMP_EFFECT := preload("res://player/jump_effect.tscn")
 const PLAYER_HIT_EFFECT := preload("res://player/player_hit_effect.tscn")
 
 var pre_input := 0.0
@@ -80,6 +81,9 @@ func update_animation(input_x):
 func create_dust_effect():
 	Utility.instantiate_scene_on_world(DUST_EFFECT, global_position)
 
+
+func create_jump_effect():
+	Utility.instantiate_scene_on_world(JUMP_EFFECT, global_position)
 # --movement--
 
 func apply_gravity(delta):

@@ -46,6 +46,8 @@ _data = {
 }
 
 [node name="Sword" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 9
 script = ExtResource("1_nufgo")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -64,7 +66,7 @@ shape = SubResource("RectangleShape2D_axpt5")
 
 [node name="Hitbox" parent="." instance=ExtResource("2_1eno3")]
 collision_layer = 0
-collision_mask = 65
+collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -16)

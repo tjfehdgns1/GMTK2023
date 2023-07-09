@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmt6d6jru716y"]
+
+[ext_resource type="PackedScene" uid="uid://cg7ybbr4b30ls" path="res://common/dust.tscn" id="1_nvc0y"]
+
+[node name="JumpEffect" instance=ExtResource("1_nvc0y")]
+amount = 1
+emission_shape = 3
+emission_rect_extents = Vector2(4, 4)
+initial_velocity_max = 8.0
+anim_speed_min = 3.0
+anim_speed_max = 3.0
