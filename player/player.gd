@@ -81,7 +81,7 @@ func update_animation(input_x):
 
 func create_dust_effect():
 	Utility.instantiate_scene_on_world(DUST_EFFECT, global_position)
-	Sound.play(Sound.footstep,randf_range(-1.0,1.0),-20.0)
+	Sound.play(Sound.footstep, 1.0,-10.0)
 
 
 func create_jump_effect():
@@ -128,10 +128,12 @@ func handle_jump():
 		if Input.is_action_just_released("jump") and velocity.y < jump_velocity/ 2 :
 			jumped = true
 			velocity.y = jump_velocity / 2
+			Sound.play(Sound.jump,1,-30.0)
 
 		if Input.is_action_just_pressed("jump"):
 			can_jump_buffer = true
 			jump_buffer_timer.start()
+			Sound.play(Sound.jump,1,-30.0)
 
 	
 	

@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://d4ltxw36uigcf" path="res://sound/JRPG_gameOver.ogg" id="3_m5ptn"]
 
 [node name="Musix" type="Node"]
+process_mode = 3
 script = ExtResource("1_24stv")
 main_theme = ExtResource("2_nhscc")
 game_over = ExtResource("3_m5ptn")

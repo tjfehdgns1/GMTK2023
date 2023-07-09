@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://bnbqibiv4kq2h" path="res://sound/death.wav" id="6_a7dgo"]
 
 [node name="Sound" type="Node"]
+process_mode = 3
 script = ExtResource("1_w5jac")
 explode = ExtResource("2_2lh4r")
 footstep = ExtResource("3_t0ug6")

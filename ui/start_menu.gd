@@ -7,6 +7,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	await Musix.fade()
 	Musix.play(Musix.main_theme, -20.0)
 	start_button.grab_focus()
 	start_button.grab_click_focus()

@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlg77ed1qyf8m"]
+[gd_scene load_steps=6 format=3 uid="uid://dlg77ed1qyf8m"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_r0gqi"]
 [ext_resource type="PackedScene" uid="uid://6mr5p45asyw6" path="res://player/player.tscn" id="2_cett8"]
+[ext_resource type="PackedScene" uid="uid://cutywqq1fxh53" path="res://ui/puase_menu.tscn" id="4_t7gku"]
 [ext_resource type="PackedScene" uid="uid://c55w2frkln3e8" path="res://levels/level_1.tscn" id="4_v2vkp"]
 [ext_resource type="PackedScene" uid="uid://bn1t3yywd8gp3" path="res://ui/health_meter.tscn" id="4_xc8b0"]
 
 [node name="Main" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_r0gqi")
 
 [node name="Player" parent="." instance=ExtResource("2_cett8")]
@@ -19,5 +21,9 @@ offset_top = 16.0
 offset_right = 16.0
 offset_bottom = 16.0
 mouse_filter = 2
+
+[node name="PuaseMenu" parent="HUD" instance=ExtResource("4_t7gku")]
+process_mode = 3
+visible = false
 
 [node name="Level1" parent="." instance=ExtResource("4_v2vkp")]

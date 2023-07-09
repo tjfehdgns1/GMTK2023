@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cnso8u3ot3p3y"]
+[gd_scene load_steps=21 format=3 uid="uid://cnso8u3ot3p3y"]
 
 [ext_resource type="Texture2D" uid="uid://blwgl0xo4d4ly" path="res://sword/Sword-Sheet.png" id="1_8au1a"]
 [ext_resource type="Script" path="res://sword/Sword.gd" id="1_nufgo"]
@@ -23,6 +23,18 @@ height = 26.0
 
 [sub_resource type="Animation" id="Animation_7jm4t"]
 resource_name = "die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SwordSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [5, 3, 4]
+}
 
 [sub_resource type="Animation" id="Animation_6ttg8"]
 resource_name = "idle"
@@ -72,7 +84,8 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_v2ecp"]
 resource_name = "run"
-length = 0.2
+length = 0.4
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -114,6 +127,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SwordSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6bfh3"]
 _data = {
@@ -124,15 +149,174 @@ _data = {
 "run": SubResource("Animation_v2ecp")
 }
 
+[sub_resource type="Animation" id="Animation_mbpfu"]
+resource_name = "attack"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../SwordSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 5, 1, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Hitbox:monitorable")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Hurtbox:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, false, true]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"attack_sound"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../SwordSprite:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.179575, 1.26106, 0.00637579]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../Hitbox:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.179575, 1.26106, 0.00637579]
+}
+
+[sub_resource type="Animation" id="Animation_4h4v8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Hitbox:monitoring")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Hurtbox:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Hitbox:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../SwordSprite:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.179575]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2pida"]
+_data = {
+"RESET": SubResource("Animation_4h4v8"),
+"attack": SubResource("Animation_mbpfu")
+}
+
+[sub_resource type="Animation" id="Animation_er8gx"]
+resource_name = "blink"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../SwordSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false, true, false, true, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h374i"]
+_data = {
+"blink": SubResource("Animation_er8gx")
+}
+
 [node name="Sword" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_nufgo")
 
 [node name="SwordSprite" type="Sprite2D" parent="."]
-position = Vector2(0, -23)
+rotation = -0.179575
 texture = ExtResource("1_8au1a")
+offset = Vector2(0, -23)
 hframes = 6
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -4)
@@ -146,6 +330,8 @@ shape = SubResource("RectangleShape2D_axpt5")
 [node name="Hitbox" parent="." instance=ExtResource("2_1eno3")]
 collision_layer = 0
 collision_mask = 64
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -16)
@@ -167,19 +353,26 @@ libraries = {
 
 [node name="AttackAnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../AnimationPlayer")
+libraries = {
+"": SubResource("AnimationLibrary_2pida")
+}
 
 [node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../AttackAnimationPlayer")
+libraries = {
+"": SubResource("AnimationLibrary_h374i")
+}
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.15
 one_shot = true
 
 [node name="JumpBufferTimer" type="Timer" parent="."]
-wait_time = 0.15
+wait_time = 0.05
 one_shot = true
 
 [node name="Camera2D" parent="." instance=ExtResource("4_lf7e2")]
+position = Vector2(0, 0)
 zoom = Vector2(1, 1)
 target_path = NodePath("..")
 

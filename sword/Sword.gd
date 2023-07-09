@@ -21,6 +21,8 @@ var jumped := false
 @onready var player_sprite: Sprite2D = $SwordSprite
 @onready var hurtbox: Area2D = $Hurtbox
 @onready var camera_2d: Camera2D = $Camera2D
+@onready var attack_animation_player: AnimationPlayer = $AttackAnimationPlayer
+@onready var blink_animation_player: AnimationPlayer = $BlinkAnimationPlayer
 
 
 
@@ -59,7 +61,7 @@ func _physics_process(delta: float) -> void:
 		coyote_timer.start()
 
 	handle_jump()
-	attack()
+#	attack()
 
 	
 func update_animation(input_x):
@@ -84,14 +86,14 @@ func update_animation(input_x):
 
 func create_dust_effect():
 	Utility.instantiate_scene_on_world(DUST_EFFECT, global_position)
-	Sound.play(Sound.footstep,randf_range(-1.0,1.0),-20.0)
+	Sound.play(Sound.footstep,1.0,-10.0)
 
 
 func create_jump_effect():
 	Utility.instantiate_scene_on_world(JUMP_EFFECT, global_position)
 	print_debug("jump")
 #	Sound.play(Sound.jump,1,-30.0)
-
+	
 
 
 
@@ -135,10 +137,12 @@ func handle_jump():
 		if Input.is_action_just_released("jump") and velocity.y < jump_velocity/ 2 :
 			jumped = true
 			velocity.y = jump_velocity / 2
+			Sound.play(Sound.swing)
 
 		if Input.is_action_just_pressed("jump"):
 			can_jump_buffer = true
 			jump_buffer_timer.start()
+			Sound.play(Sound.swing)
 
 	
 	
@@ -151,13 +155,13 @@ func _on_jump_buffer_timer_timeout() -> void:
 
 
 
-
-func attack():
-	if Input.is_action_just_pressed("attack"):
-		animation_player.play("attack")
-
-func attack_sound():
-		Sound.play(Sound.swing)
+#
+#func attack():
+#	if Input.is_action_just_pressed("attack"):
+#		attack_animation_player.play("attack")
+#
+#func attack_sound():
+#		Sound.play(Sound.swing)
 
 
 
@@ -169,6 +173,7 @@ func _on_hurtbox_hurt(hitbox, damage) -> void:
 	Sound.play(Sound.die)
 	PlayerStats.health -= damage
 	hurtbox.is_invincible = true
+	blink_animation_player.play("blink")
 	await get_tree().create_timer(1.0).timeout
 	hurtbox.is_invincible = false
 	print_debug("player hurt")
@@ -182,7 +187,7 @@ func _on_hurtbox_hurt(hitbox, damage) -> void:
 func _die():
 	camera_2d.reparent(get_tree().current_scene)
 	Utility.instantiate_scene_on_world(PLAYER_HIT_EFFECT, global_position)
-	queue_free()
+	get_tree().change_scene_to_file("res://ui/game_over_menu.tscn")
 	
 	
 	
