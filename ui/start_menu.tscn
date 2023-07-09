@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://b0ig16krbj1xj"]
+[gd_scene load_steps=11 format=3 uid="uid://b0ig16krbj1xj"]
 
 [ext_resource type="Script" path="res://ui/start_menu.gd" id="1_fe600"]
+[ext_resource type="Theme" uid="uid://dqyaxxas1a6n" path="res://ui/default_theme.tres" id="1_jh2yl"]
 [ext_resource type="Texture2D" uid="uid://c0d2gco5dora" path="res://ui/startmenuimage_background.png" id="2_f40wk"]
 [ext_resource type="Texture2D" uid="uid://b0na427ihximn" path="res://ui/startmenuimage-sword-Sheet.png" id="3_eyuv5"]
 [ext_resource type="Texture2D" uid="uid://cahcvwyjae2fm" path="res://ui/startmenuimage-shadow-Sheet.png" id="3_qevrm"]
@@ -292,6 +293,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_jh2yl")
 script = ExtResource("1_fe600")
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -385,3 +387,7 @@ size_flags_vertical = 4
 focus_neighbor_top = NodePath("../OptionButton")
 focus_neighbor_bottom = NodePath("../StartButton")
 text = "Quit"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/OptionButton" to="." method="_on_option_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

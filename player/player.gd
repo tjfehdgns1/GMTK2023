@@ -23,9 +23,10 @@ var jumped := false
 @onready var override_animation_player: AnimationPlayer = $OverrideAnimationPlayer
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var hurtbox: Area2D = $Hurtbox
+@onready var attack_animation_player: AnimationPlayer = $AttackAnimationPlayer
 
 
-
+const SWORD := preload("res://sword/Sword.tscn")
 const DUST_EFFECT := preload("res://common/dust.tscn")
 const JUMP_EFFECT := preload("res://player/jump_effect.tscn")
 const PLAYER_HIT_EFFECT := preload("res://player/player_hit_effect.tscn")
@@ -35,8 +36,8 @@ var pre_input := 0.0
 
 # --Update--
 func _ready() -> void:
-	PlayerStats.no_health.connect(_die)
-
+#	PlayerStats.health_changed.connect(damaged)
+	pass
 
 func _physics_process(delta: float) -> void:
 	move_x = Input.get_axis("move_left", "move_right")
@@ -75,15 +76,18 @@ func update_animation(input_x):
 		animation_player.play("idle")
 	
 	if !is_on_floor():
-		if velocity.y < 0:
+		if velocity.y < 0 and jumped:
 			animation_player.play("jump")
 
 func create_dust_effect():
 	Utility.instantiate_scene_on_world(DUST_EFFECT, global_position)
+	Sound.play(Sound.footstep,randf_range(-1.0,1.0),-20.0)
 
 
 func create_jump_effect():
 	Utility.instantiate_scene_on_world(JUMP_EFFECT, global_position)
+	print_debug("jump")
+#	Sound.play(Sound.jump,1,-30.0)
 # --movement--
 
 func apply_gravity(delta):
@@ -133,16 +137,21 @@ func handle_jump():
 	
 	pass
 func jump(jump_velocity):
+	
 	velocity.y = jump_velocity
-	
-	
+
+func jump_sound():
+#	Sound.play("Jump",1.0,-10.0)
+	pass
 	
 	
 	
 func attack():
-	if Input.is_action_pressed("attack"):
-		override_animation_player.play("attack")
-	
+	if Input.is_action_just_pressed("attack"):
+		attack_animation_player.play("attack")
+
+func attack_sound():
+		Sound.play(Sound.swing)
 	
 	
 
@@ -152,17 +161,15 @@ func _on_jump_buffer_timer_timeout() -> void:
 
 
 func _on_hurtbox_hurt(hitbox, damage) -> void:
-	override_animation_player.play("blink")
-	print_debug("player hurt")
-	Events.add_screenshake.emit(2, 0.1)
-	PlayerStats.health -= damage
+	Events.add_screenshake.emit(2, 0.1) # !working
+	Sound.play(Sound.die) # !working
 	hurtbox.is_invincible = true
-	await get_tree().create_timer(1.0).timeout
-	hurtbox.is_invincible = false
-	pass # Replace with function body.
-
-
-func _die():
-	camera_2d.reparent(get_tree().current_scene)
+	PlayerStats.health -= damage
+	animation_player.play("die")
+	set_physics_process(false)
 	Utility.instantiate_scene_on_world(PLAYER_HIT_EFFECT, global_position)
+	print_debug("player hurt")
+	await get_tree().create_timer(1.0).timeout
+	Utility.instantiate_scene_on_world(SWORD, global_position)
+
 	queue_free()

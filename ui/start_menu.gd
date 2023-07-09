@@ -7,6 +7,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Musix.play(Musix.main_theme, -20.0)
 	start_button.grab_focus()
 	start_button.grab_click_focus()
 	pass # Replace with function body.
@@ -16,3 +17,18 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 		
+
+
+func _on_start_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://main.tscn")
+	pass # Replace with function body.
+
+
+func _on_option_button_pressed() -> void:
+	print_debug("option pressed")
+	pass # Replace with function body.
+
+
+func _on_quit_button_pressed() -> void:
+	get_tree().quit()
+	pass # Replace with function body.

@@ -1,0 +1,36 @@
+[gd_scene load_steps=8 format=3 uid="uid://dwpivcvutpuvo"]
+
+[ext_resource type="Script" path="res://autoloads/sound.gd" id="1_w5jac"]
+[ext_resource type="AudioStream" uid="uid://lllva8ctopl3" path="res://sound/explode.wav" id="2_2lh4r"]
+[ext_resource type="AudioStream" uid="uid://b5lf2oh8q6qqj" path="res://sound/step.wav" id="3_t0ug6"]
+[ext_resource type="AudioStream" uid="uid://co5r1gi27dil6" path="res://sound/swing.wav" id="4_ayamx"]
+[ext_resource type="AudioStream" uid="uid://b1572j35io53m" path="res://sound/jump.wav" id="4_rxefo"]
+[ext_resource type="AudioStream" uid="uid://d4e6isbfogk3f" path="res://sound/click1.wav" id="5_wjah4"]
+[ext_resource type="AudioStream" uid="uid://bnbqibiv4kq2h" path="res://sound/death.wav" id="6_a7dgo"]
+
+[node name="Sound" type="Node"]
+script = ExtResource("1_w5jac")
+explode = ExtResource("2_2lh4r")
+footstep = ExtResource("3_t0ug6")
+jump = ExtResource("4_rxefo")
+swing = ExtResource("4_ayamx")
+click = ExtResource("5_wjah4")
+die = ExtResource("6_a7dgo")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Sound"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+bus = &"Sound"
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="."]
+bus = &"Sound"
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="."]
+bus = &"Sound"
+
+[node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="."]
+bus = &"Sound"
+
+[node name="AudioStreamPlayer6" type="AudioStreamPlayer" parent="."]
+bus = &"Sound"

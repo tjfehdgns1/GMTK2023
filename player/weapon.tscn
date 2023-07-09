@@ -12,7 +12,7 @@ height = 34.0
 script = ExtResource("1_in1mg")
 
 [node name="Hitbox" parent="." instance=ExtResource("1_m0ydd")]
-collision_layer = 0
+collision_layer = 32
 collision_mask = 65
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
@@ -23,6 +23,3 @@ shape = SubResource("CapsuleShape2D_uglu2")
 position = Vector2(0, -23)
 texture = ExtResource("1_72a2x")
 hframes = 6
-
-[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
-[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

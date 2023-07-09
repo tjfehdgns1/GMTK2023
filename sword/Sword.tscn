@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://sword/Sword.gd" id="1_nufgo"]
 [ext_resource type="PackedScene" uid="uid://7uxbbdxixb7d" path="res://common/hitbox.tscn" id="2_1eno3"]
 [ext_resource type="PackedScene" uid="uid://cpxlhgo304shr" path="res://common/hurtbox.tscn" id="3_c1uyv"]
-[ext_resource type="PackedScene" uid="uid://472i0887s0b" path="res://autoloads/player_stats.tscn" id="4_wuquy"]
+[ext_resource type="PackedScene" uid="uid://bshjfvy2hiom2" path="res://autoloads/camera_2d.tscn" id="4_lf7e2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i6eii"]
 radius = 4.0
@@ -21,24 +21,103 @@ height = 32.0
 radius = 4.0
 height = 26.0
 
-[sub_resource type="Animation" id="Animation_ur4e3"]
-resource_name = "attack"
-
 [sub_resource type="Animation" id="Animation_7jm4t"]
 resource_name = "die"
 
 [sub_resource type="Animation" id="Animation_6ttg8"]
 resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SwordSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 3, 0, 3, 0, 3, 0]
+}
 
 [sub_resource type="Animation" id="Animation_f0wk4"]
 resource_name = "jump"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SwordSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"create_jump_effect"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_v2ecp"]
 resource_name = "run"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SwordSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"create_dust_effect"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_cn4lf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6bfh3"]
 _data = {
-"attack": SubResource("Animation_ur4e3"),
+"RESET": SubResource("Animation_cn4lf"),
 "die": SubResource("Animation_7jm4t"),
 "idle": SubResource("Animation_6ttg8"),
 "jump": SubResource("Animation_f0wk4"),
@@ -50,7 +129,7 @@ collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_nufgo")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="SwordSprite" type="Sprite2D" parent="."]
 position = Vector2(0, -23)
 texture = ExtResource("1_8au1a")
 hframes = 6
@@ -81,14 +160,27 @@ position = Vector2(0, -14)
 shape = SubResource("CapsuleShape2D_a5a4i")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
 libraries = {
 "": SubResource("AnimationLibrary_6bfh3")
 }
 
-[node name="PlayerStats" parent="." instance=ExtResource("4_wuquy")]
+[node name="AttackAnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimationPlayer")
+
+[node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AttackAnimationPlayer")
 
 [node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
 
 [node name="JumpBufferTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[node name="Camera2D" parent="." instance=ExtResource("4_lf7e2")]
+zoom = Vector2(1, 1)
+target_path = NodePath("..")
 
 [connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]

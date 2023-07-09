@@ -1,12 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://c55w2frkln3e8"]
+[gd_scene load_steps=7 format=3 uid="uid://c55w2frkln3e8"]
 
 [ext_resource type="PackedScene" uid="uid://dxrelx1mdn7e6" path="res://levels/tile_map.tscn" id="1_ul8k0"]
 [ext_resource type="PackedScene" uid="uid://c0eowp5drqjf2" path="res://levels/spike.tscn" id="2_0rult"]
 [ext_resource type="PackedScene" uid="uid://cllcuq5e1o251" path="res://enemy/mouse.tscn" id="3_v5hag"]
-[ext_resource type="PackedScene" uid="uid://6mr5p45asyw6" path="res://player/player.tscn" id="4_pk6oe"]
 [ext_resource type="PackedScene" uid="uid://dx5l7r70l1cff" path="res://enemy/worm.tscn" id="4_qcwi0"]
 [ext_resource type="PackedScene" uid="uid://q4qj8rc811ev" path="res://enemy/cannon.tscn" id="5_lqvtb"]
-[ext_resource type="PackedScene" uid="uid://bshjfvy2hiom2" path="res://common/camera_2d.tscn" id="5_txja8"]
 [ext_resource type="PackedScene" uid="uid://4wbjx204bnlt" path="res://levels/vertical_platform.tscn" id="6_od66w"]
 
 [node name="Level1" type="Node2D"]
@@ -788,10 +786,5 @@ position = Vector2(688, 20)
 [node name="AnimatableBody2D" parent="TileMap/MovingPlatform" index="0"]
 collision_layer = 8
 collision_mask = 6
-
-[node name="Player" parent="." instance=ExtResource("4_pk6oe")]
-position = Vector2(-40, -4)
-
-[node name="Camera2D2" parent="Player" instance=ExtResource("5_txja8")]
 
 [editable path="TileMap/MovingPlatform"]

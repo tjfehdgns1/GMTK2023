@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://ipooc7o35h6f"]
+
+[ext_resource type="Script" path="res://autoloads/musix.gd" id="1_24stv"]
+[ext_resource type="AudioStream" uid="uid://c7qkkaxhglivw" path="res://sound/The Adventure Begins 8-bit remix.ogg" id="2_nhscc"]
+[ext_resource type="AudioStream" uid="uid://bgpyrwamft4im" path="res://sound/JRPG_royalCourt_loop.ogg" id="2_qhg7p"]
+[ext_resource type="AudioStream" uid="uid://d4ltxw36uigcf" path="res://sound/JRPG_gameOver.ogg" id="3_m5ptn"]
+
+[node name="Musix" type="Node"]
+script = ExtResource("1_24stv")
+main_theme = ExtResource("2_nhscc")
+game_over = ExtResource("3_m5ptn")
+in_game = ExtResource("2_qhg7p")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Music"

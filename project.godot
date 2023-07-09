@@ -20,6 +20,8 @@ config/icon="res://icon.svg"
 Utility="*res://autoloads/utility.gd"
 PlayerStats="*res://autoloads/player_stats.tscn"
 Events="*res://autoloads/events.gd"
+Sound="*res://autoloads/sound.tscn"
+Musix="*res://autoloads/musix.tscn"
 
 [display]
 
@@ -28,6 +30,11 @@ window/size/viewport_height=180
 window/size/window_width_override=1920
 window/size/window_height_override=1080
 window/stretch/mode="canvas_items"
+
+[gui]
+
+theme/custom="res://ui/default_theme.tres"
+theme/custom_font="res://common/04B_30__.TTF"
 
 [input]
 
