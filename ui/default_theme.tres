@@ -1,6 +1,24 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dqyaxxas1a6n"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://dqyaxxas1a6n"]
 
 [ext_resource type="FontFile" uid="uid://cxi3mjbgjeu2o" path="res://common/04B_30__.TTF" id="1_tf5p8"]
+[ext_resource type="Texture2D" uid="uid://beunafpwaikgv" path="res://ui/hover.png" id="2_mubsl"]
+[ext_resource type="Texture2D" uid="uid://kug00mi3w0w7" path="res://ui/normal.png" id="3_c3gnn"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nxtxo"]
+texture = ExtResource("2_mubsl")
+texture_margin_left = 1.0
+texture_margin_top = 1.0
+texture_margin_right = 1.0
+texture_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_euhk0"]
+texture = ExtResource("3_c3gnn")
+texture_margin_left = 1.0
+texture_margin_top = 1.0
+texture_margin_right = 1.0
+texture_margin_bottom = 1.0
 
 [resource]
 Button/fonts/font = ExtResource("1_tf5p8")
+Button/styles/hover = SubResource("StyleBoxTexture_nxtxo")
+Button/styles/normal = SubResource("StyleBoxTexture_euhk0")

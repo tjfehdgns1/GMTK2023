@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c55w2frkln3e8"]
+[gd_scene load_steps=25 format=3 uid="uid://c55w2frkln3e8"]
 
 [ext_resource type="PackedScene" uid="uid://dxrelx1mdn7e6" path="res://levels/tile_map.tscn" id="1_ul8k0"]
 [ext_resource type="PackedScene" uid="uid://c0eowp5drqjf2" path="res://levels/spike.tscn" id="2_0rult"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cpxlhgo304shr" path="res://common/hurtbox.tscn" id="9_a8jfb"]
 [ext_resource type="Texture2D" uid="uid://ci47qslr2j7qi" path="res://enemy/Cannon-Sheet.png" id="10_et8fo"]
 [ext_resource type="Script" path="res://levels/finish.gd" id="11_psg4i"]
+[ext_resource type="Texture2D" uid="uid://cg0jy5fw5axca" path="res://levels/Door.png" id="12_e2ru0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6sx7j"]
 size = Vector2(32, 8)
@@ -177,7 +178,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7c42q"]
-size = Vector2(68, 164)
+size = Vector2(68, 60)
 
 [node name="Level1" type="Node2D"]
 process_mode = 1
@@ -903,6 +904,7 @@ layer_0/tile_data = PackedInt32Array(65534, 196609, 0, 65535, 262145, 0, 0, 2621
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap/MovingPlatform/AnimatableBody2D"]
 position = Vector2(0.3125, 4)
 shape = SubResource("RectangleShape2D_6sx7j")
+one_way_collision = true
 
 [node name="Path2D" type="Path2D" parent="TileMap/MovingPlatform"]
 curve = ExtResource("7_22ib6")
@@ -1036,8 +1038,12 @@ script = ExtResource("11_psg4i")
 [node name="Sprite2D" type="Sprite2D" parent="Finish"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Finish"]
-position = Vector2(-30, -10)
+position = Vector2(-32, 20)
 shape = SubResource("RectangleShape2D_7c42q")
+
+[node name="Door" type="Sprite2D" parent="."]
+position = Vector2(544, 672)
+texture = ExtResource("12_e2ru0")
 
 [connection signal="no_health" from="Cannon2/Stats" to="Cannon2" method="_on_stats_no_health" flags=18]
 [connection signal="hurt" from="Cannon2/Hurtbox" to="Cannon2" method="_on_hurtbox_hurt" flags=18]

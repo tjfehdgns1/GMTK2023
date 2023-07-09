@@ -1,11 +1,12 @@
 extends Control
 
+@onready var restart_button: Button = %RestartButton
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	await Musix.fade()
 	Musix.play(Musix.game_over)
-	grab_focus()
+	restart_button.grab_focus()
 	pass # Replace with function body.
 
 

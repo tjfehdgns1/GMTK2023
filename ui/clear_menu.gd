@@ -3,6 +3,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$ColorRect/CenterContainer/VBoxContainer/QuitButton.grab_focus()
 	pass # Replace with function body.
 
 

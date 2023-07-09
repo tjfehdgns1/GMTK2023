@@ -18,7 +18,7 @@ radius = 6.0
 height = 32.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a5a4i"]
-radius = 4.0
+radius = 3.0
 height = 26.0
 
 [sub_resource type="Animation" id="Animation_cn4lf"]
@@ -319,15 +319,18 @@ hframes = 6
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-1, -4)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_i6eii")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-1, -16)
 shape = SubResource("RectangleShape2D_axpt5")
 
 [node name="Hitbox" parent="." instance=ExtResource("2_1eno3")]
+visible = false
 collision_layer = 0
 collision_mask = 64
 monitoring = false
@@ -342,7 +345,7 @@ collision_layer = 32
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0, -14)
+position = Vector2(-2, -13)
 shape = SubResource("CapsuleShape2D_a5a4i")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
