@@ -488,7 +488,6 @@ radius = 6.0
 height = 20.0
 
 [node name="Player" type="CharacterBody2D"]
-process_mode = 1
 collision_layer = 2
 collision_mask = 9
 floor_constant_speed = true
@@ -545,7 +544,6 @@ wait_time = 0.15
 one_shot = true
 
 [node name="Camera2D" parent="." instance=ExtResource("4_sslbh")]
-zoom = Vector2(1, 1)
 target_path = NodePath("..")
 
 [node name="Hurtbox" parent="." instance=ExtResource("3_lkwi2")]

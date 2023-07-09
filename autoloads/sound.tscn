@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dwpivcvutpuvo"]
+[gd_scene load_steps=9 format=3 uid="uid://dwpivcvutpuvo"]
 
 [ext_resource type="Script" path="res://autoloads/sound.gd" id="1_w5jac"]
 [ext_resource type="AudioStream" uid="uid://lllva8ctopl3" path="res://sound/explode.wav" id="2_2lh4r"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://b1572j35io53m" path="res://sound/jump.wav" id="4_rxefo"]
 [ext_resource type="AudioStream" uid="uid://d4e6isbfogk3f" path="res://sound/click1.wav" id="5_wjah4"]
 [ext_resource type="AudioStream" uid="uid://bnbqibiv4kq2h" path="res://sound/death.wav" id="6_a7dgo"]
+[ext_resource type="AudioStream" uid="uid://wwst8xktde1g" path="res://sound/hurt.wav" id="8_vdool"]
 
 [node name="Sound" type="Node"]
 process_mode = 3
@@ -17,6 +18,7 @@ jump = ExtResource("4_rxefo")
 swing = ExtResource("4_ayamx")
 click = ExtResource("5_wjah4")
 die = ExtResource("6_a7dgo")
+hurt = ExtResource("8_vdool")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 bus = &"Sound"
@@ -34,4 +36,7 @@ bus = &"Sound"
 bus = &"Sound"
 
 [node name="AudioStreamPlayer6" type="AudioStreamPlayer" parent="."]
+bus = &"Sound"
+
+[node name="AudioStreamPlayer7" type="AudioStreamPlayer" parent="."]
 bus = &"Sound"

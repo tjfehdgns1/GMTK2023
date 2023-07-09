@@ -9,6 +9,7 @@ const ENEMY_DEATH_EFFECT := preload("res://enemy/enemy_death.tscn")
 @onready var bullet_spawn_point: Marker2D = $BulletSpawnPoint
 @onready var fire_direction: Marker2D = $FireDirection
 @export var bullet_speed = 40.0
+@export var reload_time = 0.0
 
 
 
@@ -23,11 +24,13 @@ func fire_bullet():
 
 
 func _on_hurtbox_hurt(hitbox, damage) -> void:
+	Sound.play(Sound.hurt,1.0,-20.0)
 	$Stats.health -= damage
 	
 
 
 func _on_stats_no_health() -> void:
 	Utility.instantiate_scene_on_world(ENEMY_DEATH_EFFECT, global_position)
+	Sound.play(Sound.explode)
 	queue_free()
 

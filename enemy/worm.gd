@@ -40,10 +40,12 @@ func _physics_process(delta: float) -> void:
 
 func _on_stats_no_health() -> void:
 	Utility.instantiate_scene_on_world(ENEMY_DEATH_EFFECT, global_position)
+	Sound.play(Sound.explode)
 	queue_free()
 	pass # Replace with function body.
 
 
 func _on_hurtbox_hurt(hitbox, damage) -> void:
 	stats.health -= damage
+	Sound.play(Sound.hurt,1.0,-20.0)
 	pass # Replace with function body.

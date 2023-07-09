@@ -49,10 +49,16 @@ func is_at_ledge():
 
 func _on_hurtbox_hurt(hitbox, damage) -> void:
 	$Stats.health -= damage
+	Sound.play(Sound.hurt,1.0,-20.0)
 	print_debug("mouse hurt")
 	
 
 
 func _on_stats_no_health() -> void:
 	Utility.instantiate_scene_on_world(ENEMY_DEATH_EFFECT, global_position)
+	Sound.play(Sound.explode)
 	queue_free()
+
+
+func _on_finish_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.

@@ -12,7 +12,7 @@ var sounds_path = "res://sound/"
 @export var swing : AudioStream
 @export var click : AudioStream
 @export var die : AudioStream
-
+@export var hurt : AudioStream
 
 
 

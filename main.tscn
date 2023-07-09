@@ -7,8 +7,17 @@
 [ext_resource type="PackedScene" uid="uid://bn1t3yywd8gp3" path="res://ui/health_meter.tscn" id="4_xc8b0"]
 
 [node name="Main" type="Node2D"]
-process_mode = 3
 script = ExtResource("1_r0gqi")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -74.0
+offset_top = -117.0
+offset_right = 237.0
+offset_bottom = -52.0
+text = "you better not get hit,
+sword alone does nothing"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Player" parent="." instance=ExtResource("2_cett8")]
 position = Vector2(17, 0)
@@ -27,3 +36,24 @@ process_mode = 3
 visible = false
 
 [node name="Level1" parent="." instance=ExtResource("4_v2vkp")]
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 579.0
+offset_top = -73.0
+offset_right = 649.0
+offset_bottom = -53.0
+text = "Wait..."
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 1136.0
+offset_top = 50.0
+offset_right = 1362.0
+offset_bottom = 70.0
+text = "you can do this"
+
+[node name="Label4" type="Label" parent="."]
+offset_left = 718.0
+offset_top = 489.0
+offset_right = 944.0
+offset_bottom = 509.0
+text = "easy game"

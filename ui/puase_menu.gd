@@ -20,12 +20,14 @@ func _process(delta: float) -> void:
 
 
 func _on_resume_button_pressed() -> void:
+	Sound.play(Sound.click)
 	print_debug("resume")
 	paused = false
 	pass # Replace with function body.
 
 
 func _on_quit_button_pressed() -> void:
+	Sound.play(Sound.click)
 	get_tree().change_scene_to_file("res://ui/start_menu.tscn")
 	paused = false
 	pass # Replace with function body.

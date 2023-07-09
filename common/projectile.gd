@@ -2,6 +2,8 @@ extends Node2D
 class_name Projectile
 
 
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+
 
 
 @export var speed := 250.0
@@ -27,10 +29,15 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	Utility.instantiate_scene_on_world(EXPLOSION_EFFECT, global_position)
-	
+
 	queue_free()
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	Utility.instantiate_scene_on_world(EXPLOSION_EFFECT, global_position)
-	
+
 	queue_free()
+
+func play_explosion():
+	Sound.play(Sound.explode,1.0,-20.0)
+	
+

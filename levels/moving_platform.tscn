@@ -1,14 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6phil52woq1b"]
+[gd_scene load_steps=6 format=3 uid="uid://b6phil52woq1b"]
 
-[ext_resource type="Curve2D" uid="uid://csqb0mr4frha4" path="res://levels/vertical.tres" id="1_84mco"]
+[ext_resource type="Curve2D" uid="uid://cx0hak1gt0r4o" path="res://levels/horizontal.tres" id="1_lx5sy"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_eju0p"]
-size = Vector2(32, 8)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6sx7j"]
+size = Vector2(64, 8)
 
-[sub_resource type="Animation" id="Animation_htfev"]
+[sub_resource type="Animation" id="Animation_gnhl3"]
 resource_name = "move"
-length = 3.0
-loop_mode = 1
+length = 5.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -16,32 +15,48 @@ tracks/0/path = NodePath("Path2D/PathFollow2D:progress_ratio")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 3),
+"times": PackedFloat32Array(0, 5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 1.0]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_nlicr"]
+[sub_resource type="Animation" id="Animation_nekhg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path2D/PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8o3sd"]
 _data = {
-"move": SubResource("Animation_htfev")
+"RESET": SubResource("Animation_nekhg"),
+"move": SubResource("Animation_gnhl3")
 }
 
 [node name="MovingPlatform" type="Node2D"]
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
-position = Vector2(0, -5.48494)
+position = Vector2(-0.3125, 0)
+collision_layer = 8
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
-position = Vector2(0, -4)
-shape = SubResource("RectangleShape2D_eju0p")
+shape = SubResource("RectangleShape2D_6sx7j")
 
 [node name="Path2D" type="Path2D" parent="."]
-curve = ExtResource("1_84mco")
+curve = ExtResource("1_lx5sy")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2(0, -5.48494)
-progress = 5.35089
+position = Vector2(-0.3125, 0)
 rotates = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Path2D/PathFollow2D"]
@@ -50,5 +65,5 @@ update_rotation = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_nlicr")
+"": SubResource("AnimationLibrary_8o3sd")
 }
